@@ -1,8 +1,10 @@
 # GTM skills
 
-Agent skills for go-to-market work: positioning, customer research, prospecting, outreach, and ads. They work in Claude Code, Codex, and any agent that reads `SKILL.md` files.
+Built by [Theo Ohene](https://theoohene.com). GTM operator, in startups since 2011. Over 15 years I've worked with more than 25 startups and scale-ups from seed to Series C, and taught GTM and AI at MIT, UCL, and King's College London.
 
-Built by Theo Ohene from 15 years of growth work with startups and scale-ups, and from teaching GTM at MIT, UCL, and King's College London.
+These are the agent skills I use day to day for positioning, customer research, prospecting, outreach, and ads. Shared free under an MIT licence. I'm adding more over time, so star or watch the repo.
+
+If you want hands-on help, [Skyamo](https://skyamo.com) is my consultancy covering product marketing, lifecycle, ads and content. If you want your team to build workflows like these, [Riffspace](https://riffspace.ai) runs AI training workshops for GTM teams.
 
 ## Start here
 
