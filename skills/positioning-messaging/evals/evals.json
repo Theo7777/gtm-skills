@@ -1,0 +1,69 @@
+{
+  "skill_name": "positioning-messaging",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We need a new homepage. We make software for teams. It's an AI tool that makes work faster. Can you write the hero?",
+      "expected_output": "Should check for .agents/product-marketing.md, then .claude/product-marketing.md. With no file present, should suggest running gtm-context without blocking. Should recognise the input is too vague for execution and switch to foundation mode, explaining in one line that copy without positioning ends up generic. Should ask the critical three one at a time, starting with 'What does your product do?' and showing the three anchor patterns (category, use case, competitive alternative) with examples. Should not write hero copy until the critical three are answered or explicitly flagged as assumptions. Should ask no more than five questions in total.",
+      "assertions": [
+        "Checks for .agents/product-marketing.md before asking questions",
+        "Suggests gtm-context but does not refuse to continue without it",
+        "Uses foundation mode rather than writing copy from the vague input",
+        "Asks the first critical question on its own, not all three at once",
+        "Shows all three anchor patterns with an example for each",
+        "Does not produce a hero header in this first response",
+        "Asks five or fewer questions across the conversation"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Write the full homepage copy for us. Everything you need is in the context file.",
+      "expected_output": "Should read .agents/product-marketing.md and extract the critical three: what it does (category anchor), who it is for (with use case), and how it differs (competitive alternative and its problem). Should go straight to execution mode without asking the critical questions again. Should restate the messaging building blocks briefly and flag any it inferred. Should write copy section by section in the order hero, social proof, two to three benefits, use cases or personas, how it works, and CTA bar, each with a two to three sentence rationale. Should honour the voice rules and words to avoid in the file. Should run the quality checklist before presenting.",
+      "assertions": [
+        "Reads .agents/product-marketing.md and uses its contents",
+        "Does not re-ask for product, audience, or differentiator already in the file",
+        "Hero header names a primary anchor from the file (category, use case, or alternative)",
+        "Includes hero, social proof, benefits, use cases or personas, how it works, and CTA bar sections",
+        "Each section has a brief rationale of two to three sentences",
+        "Uses none of the words listed under words to avoid in the file",
+        "Flags any building block that was inferred rather than stated",
+        "Contains no em dashes, emojis, or exclamation marks"
+      ],
+      "files": [
+        ".agents/product-marketing.md"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Can you rewrite this hero? Header: 'The powerful, seamless platform for modern revenue teams.' Subheader: 'Revolutionise how you work with cutting-edge AI.' Context: it's a tool that writes CRM notes automatically from sales calls, for account executives at B2B SaaS companies who currently type notes into Salesforce by hand after every call.",
+      "expected_output": "Should diagnose the original as failing the five-second test, with no anchor and vague qualifiers ('powerful', 'seamless', 'revolutionise', 'cutting-edge'). Should use execution mode since the critical three are inferable: use case anchor (writes CRM notes from calls), audience (AEs at B2B SaaS), and alternative (typing notes into Salesforce by hand). Should deliver one recommended header in the '[core benefit]. [objection crusher]' shape under 12 words, a one to two sentence subheader, and a CTA, followed by a rationale naming the anchor and implied competitive alternative.",
+      "assertions": [
+        "Names the specific vague qualifiers in the original as problems",
+        "Rewritten header contains none of: powerful, seamless, revolutionary, revolutionise, cutting-edge",
+        "Rewritten header is 12 words or fewer",
+        "Header follows a core benefit plus objection crusher or proof structure",
+        "Header or subheader makes clear the product writes CRM notes from sales calls",
+        "Rationale names the anchor used and the competitive alternative (manual note-taking in Salesforce)",
+        "Gives one recommendation rather than a list of variants"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Skip the strategy stuff, I just need five punchy taglines for our launch tomorrow. We're a project management app.",
+      "expected_output": "Should not jump straight to five taglines. Should explain briefly that 'project management app' fits many competitors, so taglines would be interchangeable. Should respect the deadline by keeping foundation mode short: check the context file, then ask the minimum needed (who it is for with the use case, and what they use today and its problem), using no more than five questions. Should offer to proceed on flagged assumptions if the user wants speed. Once answered, should deliver the five taglines the user asked for, marking one as the recommendation with a brief rationale.",
+      "assertions": [
+        "Checks for a context file before asking questions",
+        "Does not output taglines before the audience and differentiator are known or explicitly assumed",
+        "Explains in one or two sentences why positioning comes first",
+        "Asks about the target audience with a use case",
+        "Asks about the competitive alternative and its problem",
+        "Offers a fast path that proceeds on clearly flagged assumptions",
+        "Does not use the 'Not X, it's Y' reframe structure",
+        "Delivers five taglines once positioning is settled, with one marked as recommended"
+      ],
+      "files": []
+    }
+  ]
+}

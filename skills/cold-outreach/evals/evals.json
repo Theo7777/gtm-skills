@@ -1,0 +1,69 @@
+{
+  "skill_name": "cold-outreach",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write a cold email to Hannah Cole, Head of Finance at Pellow Logistics. She left a review on a software review site saying her current expense tool's receipt matching breaks every month end. We sell expense management software to UK mid-market firms with 100 to 1,000 staff. We've helped 40 finance teams close their books two days faster.",
+      "expected_output": "Should check for .agents/product-marketing.md and .claude/product-marketing.md first, then proceed with the details given. Should map the trigger to the left-negative-competitor-review signal. Should return SUBJECT: then --- then a body following Hook, Why, optional Objection, CTA. The hook should reference the review and the receipt-matching pain in the first line. Social proof should use only the 40 finance teams / two days faster claim. Should end with one yes-or-no ask, sign off with [Your Name], and add a word count line and the signal id.",
+      "assertions": [
+        "Checks for the shared context file before asking questions",
+        "Output starts with 'SUBJECT:' followed by a '---' separator",
+        "Email body is under 120 words",
+        "First line of the body references the review or the receipt-matching pain",
+        "Contains exactly one call to action, answerable with yes or no",
+        "Uses no social proof beyond the 40 finance teams and two days faster claim",
+        "Does not name the competitor tool or invent details about Pellow Logistics",
+        "Signs off with [Your Name]",
+        "Includes a word count line and names the signal as left-negative-competitor-review",
+        "Contains no em dashes, emojis, or exclamation marks"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "LinkedIn connect note for Marcus Reid, VP Sales at Tallis Health. He just started the role last week. We run outbound for health-tech companies.",
+      "expected_output": "Should map to the target-buyer-just-started signal. Should output only the connect note, with no subject or labels, under 300 characters including spaces. Uses first name only, one hook about the new role, one line of relevance, and a soft connect ask. No pitch.",
+      "assertions": [
+        "Output is under 300 characters including spaces",
+        "Uses the first name 'Marcus' only, with no formal greeting",
+        "References the new role at Tallis Health",
+        "Ends with a soft connect ask rather than a meeting request",
+        "Contains no pitch, pricing, or product features",
+        "Has no subject line or labels around the note",
+        "Includes a character count line after the note"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Write a LinkedIn message to Aisha Bello, marketing lead at Ferncroft Coffee. They just raised funding. We sell a tool that turns customer reviews into ad creative.",
+      "expected_output": "Should recognise recently-raised-funding as a low-strength signal and ask for the missing context the signal library lists (round size, lead investor, what the money is for), plus any missing sender details such as social proof, in a single message of no more than five questions. If the user declines, it should write the message without leading on 'congrats on the funding', stay under 500 characters, end with one easy question, and flag assumptions.",
+      "assertions": [
+        "Identifies the signal as recently-raised-funding",
+        "Asks for the signal's missing context in one message rather than one question at a time",
+        "Asks no more than five questions",
+        "Does not open the message with congratulations on the funding",
+        "Final message is under 500 characters including spaces",
+        "Ends with exactly one easy question and no sign-off",
+        "Invents no social proof or customer names"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "My .agents/product-marketing.md says: we sell ShiftFill, staffing software for UK care homes with 20 to 200 staff. It fills open shifts from a pool of vetted bank staff in under two hours. Social proof: used by 30 care groups. Never mention pricing or agency fees. Sender: Jo. Using that, write a cold email to Dev Patel, Operations Director at Brookhill Care Homes. Their job post for a rota coordinator mentions 'constant last-minute shift gaps'.",
+      "expected_output": "Should use the context supplied from the product-marketing file and not re-ask for sender details. Should map to the posted-relevant-job signal and reference the job post in the hook. Must respect the 'never mention pricing or agency fees' rule, use only the 30 care groups social proof, and sign off as Jo. Output in the email format with a word count and signal id.",
+      "assertions": [
+        "Does not ask for sender details already given in the context",
+        "Maps the trigger to the posted-relevant-job signal",
+        "First line references the rota coordinator job post or shift gaps",
+        "Uses only the '30 care groups' social proof",
+        "Does not mention pricing or agency fees",
+        "Signs off as Jo rather than [Your Name]",
+        "Email body is under 120 words with one yes-or-no ask",
+        "Passes the swap test: the hook would not make sense sent to a different company"
+      ],
+      "files": []
+    }
+  ]
+}

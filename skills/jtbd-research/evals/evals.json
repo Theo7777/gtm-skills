@@ -1,0 +1,58 @@
+{
+  "skill_name": "jtbd-research",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run JTBD research on invoicing tools for UK freelance designers. I want real quotes I can use on our landing page.",
+      "expected_output": "Checks for .agents/product-marketing.md then .claude/product-marketing.md. Searches Reddit, review sites, and forums, fetching actual threads. Produces a report with evidence window, job statements in 'When I, I want to, so I can' format, ranked pains in customer words, loves and complaints per tool, switching triggers mapped to push, pull, anxiety, and habit, a verbatim quote bank with URLs, and a confidence and gaps section.",
+      "assertions": [
+        "Checks .agents/product-marketing.md before .claude/product-marketing.md",
+        "States the evidence date range at the top of the report",
+        "Job statements use the 'When I ___, I want to ___, so I can ___' format",
+        "Every quote in the quote bank has a source URL",
+        "Switching triggers are grouped into push, pull, anxiety, and habit",
+        "Includes a section flagging thin or weak evidence",
+        "Does not include usernames of posters"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Do voice-of-customer research for our product. Context file is in .agents/product-marketing.md.",
+      "expected_output": "Reads the context file and takes the product, audience, and competitors from it without re-asking. Runs the research. Because the context file has a JTBD section, proposes additions or corrections to it with current and suggested text side by side, and asks before writing.",
+      "assertions": [
+        "Reads the context file and does not ask for information already in it",
+        "Uses competitors named in the context file as research targets",
+        "Proposes changes to the context file's JTBD section showing current and suggested text",
+        "Asks for confirmation before editing the context file",
+        "Does not overwrite the context file silently"
+      ],
+      "files": [".agents/product-marketing.md"]
+    },
+    {
+      "id": 3,
+      "prompt": "I've got eight customer interview transcripts from people who switched to us from spreadsheets. Can you pull out the jobs and switching triggers, and combine it with what people say online?",
+      "expected_output": "Codes the transcripts and the online sources with the same lens, labels first-party quotes as such, maps switching evidence to the four forces, and notes where interview findings and public evidence agree or differ. Removes customer names from quotes.",
+      "assertions": [
+        "Labels quotes from transcripts as first-party",
+        "Maps switching evidence to push, pull, anxiety, and habit",
+        "Compares interview findings with public evidence",
+        "Removes or avoids customer names in the quote bank",
+        "Counts independent sources rather than individual posts"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "jtbd research",
+      "expected_output": "No problem space given. If no context file exists, asks for the problem space (and up to five questions in total) before searching, and suggests running gtm-context without blocking.",
+      "assertions": [
+        "Asks for the problem space before doing any research",
+        "Asks no more than five questions",
+        "Suggests the gtm-context skill if no context file is found",
+        "Does not invent quotes or pains"
+      ],
+      "files": []
+    }
+  ]
+}

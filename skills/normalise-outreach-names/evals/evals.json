@@ -1,0 +1,42 @@
+{
+  "skill_name": "normalise-outreach-names",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Clean the names in this list before I load it into my email tool: 'Dr Tom Hale' at 'Clearpath Technologies Ltd', 'Priya Shah, CPMM' at 'Brightloop (brightloop.io)', 'J Arun Mehta' at 'NORTHWIND LTD'.",
+      "expected_output": "First names Tom, Priya, and Arun. Companies Clearpath, Brightloop, and Northwind (sentence case, since NORTHWIND is not a verified caps brand), with original columns kept.",
+      "assertions": [
+        "Adds First name and Company clean columns without overwriting the originals",
+        "Strips the honorific, the credential, and the bare initial",
+        "Removes Ltd and the parenthetical domain",
+        "Does not leave NORTHWIND in all caps unless it verified the brand styling",
+        "Prints the rows that changed"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Normalise company names: 'paydo (previously QuickPay)', 'Hartmann Tierfutter GmbH & Co. KG', 'Castly.io: Live Shopping Platform', 'AI LABS UK LIMITED'.",
+      "expected_output": "paydo (lowercase kept), Hartmann Tierfutter, Castly.io, and AI Labs UK (acronyms kept in caps, the rest sentence case).",
+      "assertions": [
+        "Keeps the current name and drops the '(previously X)' bracket",
+        "Keeps paydo lowercase",
+        "Strips the stacked German legal suffix completely",
+        "Drops the tagline after the colon",
+        "Keeps AI and UK in caps and does not produce 'Ai' or 'Uk'"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Some rows have odd first names: 'Acme Ltd', 'K', and an empty cell. Clean the list.",
+      "expected_output": "Those three rows get a blank First name and are flagged for review rather than guessed.",
+      "assertions": [
+        "Leaves unusable first names blank",
+        "Flags each of those rows with a reason",
+        "Never substitutes 'there' or 'your company' silently into the data"
+      ],
+      "files": []
+    }
+  ]
+}

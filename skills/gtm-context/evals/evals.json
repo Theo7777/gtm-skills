@@ -1,0 +1,64 @@
+{
+  "skill_name": "gtm-context",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Set up our GTM brain. Here's our site: https://example-invoicing.com. We sell invoicing software to UK freelancers.",
+      "expected_output": "Should check .agents/product-marketing.md, .claude/product-marketing.md, and the older product-marketing-context.md filenames before creating anything. With none present, should auto-draft from the URL: read the homepage, pricing, and about pages and fill every section it can, marking inferences with (assumption). Should list the gaps, critical three first, then ask three to five batched questions rather than one long questionnaire. Should save to .agents/product-marketing.md with a last_updated line and a first changelog entry, then show the summary block with filled sections, assumptions, empty sections, and a suggested next skill.",
+      "assertions": [
+        "Checks all context file locations before creating a new file",
+        "Drafts from the website before interviewing",
+        "Marks inferred content with (assumption)",
+        "Asks no more than five questions in any single batch",
+        "Saves to .agents/product-marketing.md",
+        "File includes a last_updated line in YYYY-MM-DD format",
+        "File includes positioning statement, messaging building blocks, and open questions and assumptions sections",
+        "Ends with a summary listing filled sections, assumptions to confirm, and still-empty sections"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I already made a product marketing context file with another skill pack. Can you get it ready for your skills?",
+      "expected_output": "Should read the existing .agents/product-marketing.md, which uses title case headings such as 'Product Overview', 'Problems & Pain Points', 'Competitive Landscape', and 'Switching Dynamics'. Should summarise what it covers and identify the missing sections from this template: positioning statement, messaging building blocks, channels, and open questions and assumptions. Should keep every existing heading and all content unchanged, and add the missing sections before the changelog. Should draft the positioning statement and building blocks from existing content, marking them as assumptions for confirmation. Should update last_updated and add a changelog line.",
+      "assertions": [
+        "Reads the existing file before proposing changes",
+        "Does not rename or delete any existing heading, including 'Problems & Pain Points' and 'Competitive Landscape'",
+        "Does not remove any existing content",
+        "Adds Positioning statement, Messaging building blocks, Channels, and Open questions and assumptions sections",
+        "Places new sections before the Changelog",
+        "Drafts new sections from existing content and marks them as assumptions",
+        "Adds a dated changelog entry describing the additions"
+      ],
+      "files": [".agents/product-marketing.md"]
+    },
+    {
+      "id": 3,
+      "prompt": "Update our context file: we've added a Teams plan at £40 per seat per month, and we're now targeting operations managers as well as founders.",
+      "expected_output": "Should read the whole .agents/product-marketing.md first. Should update business model and pricing in the product overview with the Teams plan, and add operations managers to the target audience and personas. Should then list knock-on sections that may need changes, such as objections (per-seat cost), messaging building blocks, and proof points, and ask before changing them. Should leave unrelated sections untouched, update last_updated, and add a changelog line.",
+      "assertions": [
+        "Reads the existing file before editing",
+        "Adds the Teams plan at £40 per seat per month to business model and pricing",
+        "Adds operations managers to target audience and personas",
+        "Lists knock-on sections as suggestions rather than editing them unasked",
+        "Leaves unrelated sections unchanged",
+        "Updates last_updated and adds a changelog line"
+      ],
+      "files": [".agents/product-marketing.md"]
+    },
+    {
+      "id": 4,
+      "prompt": "Add this to our GTM context: our ICP is seed-stage startups with under 20 staff. Also here's our new sales deck.",
+      "expected_output": "Should read the existing file and the deck. The file says the ICP is mid-market companies with 200 to 1,000 staff, and the deck mentions enterprise logos. Should not silently overwrite either. Should show the conflicting versions side by side with their sources (existing file, user message, and deck) and ask which is current. If unresolved, should record the conflict under open questions and assumptions and mark the target audience section (conflict: unresolved). Once the user confirms, should update the section and move the old version to the changelog.",
+      "assertions": [
+        "Detects the conflict between the new ICP and the existing file",
+        "Notes the deck evidence that conflicts as well",
+        "Shows each version with its source",
+        "Asks the user which is current rather than choosing silently",
+        "Records unresolved conflicts under open questions and assumptions with (conflict: unresolved)",
+        "Keeps the superseded version in the changelog once resolved"
+      ],
+      "files": [".agents/product-marketing.md", "sales-deck.pdf"]
+    }
+  ]
+}

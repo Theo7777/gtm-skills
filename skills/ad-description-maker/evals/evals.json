@@ -1,0 +1,49 @@
+{
+  "skill_name": "ad-description-maker",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write an ad description for Meta for our dog-walking booking app. Owners stress when their usual walker cancels last minute; we have vetted backup walkers who can be booked within the hour.",
+      "expected_output": "Checks for .agents/product-marketing.md then .claude/product-marketing.md; if absent, suggests gtm-context without blocking. Writes two or three descriptions using Problem to Solution to Benefit, each 35 words or fewer, opening with what the product is. The last-minute cancellation pain is made vivid. Because the platform is Meta, the product and problem sit inside the first 125 characters and character counts are shown. Each description has a product, problem, solution, and benefit breakdown with a word count, then an assumptions list.",
+      "assertions": [
+        "Checks for the shared product marketing context file before asking questions",
+        "Every description has 35 words or fewer",
+        "Every description names the product and category early",
+        "The cancellation problem is specific and felt, not generic",
+        "The product and problem appear within the first 125 characters",
+        "Shows product, problem, solution, benefit, word count, and character count",
+        "Does not invent statistics such as vetting numbers or response times beyond 'within the hour'",
+        "Contains no em dashes or exclamation marks"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Give me Google Ads descriptions for a password manager for small businesses. Headlines are already done: 'Stop sharing passwords by email' and 'Set up in 10 minutes'.",
+      "expected_output": "Switches to Google RSA platform mode. Writes four descriptions, each 90 characters or fewer with counts shown, compressed to keep the problem and benefit. Builds on the existing headlines rather than repeating them word for word. Each description reads well alongside either headline.",
+      "assertions": [
+        "Provides four descriptions",
+        "Every description is 90 characters or fewer including spaces",
+        "Shows a character count next to each description",
+        "No description repeats either headline word for word",
+        "Each description includes a problem and a benefit",
+        "Uses no vague clichés such as 'seamless' or 'game-changing'"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Make this better: 'Great features. Easy to use. Our software makes your workflow better and you'll love it.' It's a scheduling tool for physiotherapy clinics that cuts no-shows with automatic SMS reminders.",
+      "expected_output": "Diagnoses the original: disjointed flow, no product identification, vague benefit, no problem. Rewrites with Problem to Solution to Benefit, opening with what the product is, twisting the knife on no-shows, explaining the SMS reminder mechanism, and ending on a concrete benefit. Any number (such as percentage of no-shows cut) is a placeholder, not invented. Offers ad-headline-maker if no headline exists.",
+      "assertions": [
+        "Identifies disjointed flow, missing product identification, and vague benefit",
+        "Every rewrite has 35 words or fewer",
+        "Every rewrite opens by naming the product category (a scheduling tool for physiotherapy clinics or similar)",
+        "Mentions the automatic SMS reminder mechanism",
+        "Uses a placeholder such as [X]% instead of an invented statistic",
+        "Offers ad-headline-maker for a matching headline"
+      ],
+      "files": []
+    }
+  ]
+}

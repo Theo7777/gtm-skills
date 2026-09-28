@@ -1,0 +1,44 @@
+{
+  "skill_name": "linkedin-post-distill",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "What is this post on? \"Priya Shah, Head of Growth. Our free trial converted at 4%. We added a 10-minute onboarding call for every trial user. Conversion went to 11%. The onboarding call did more than any feature we shipped this year. If you run a free trial, book the onboarding call. #SaaS #growth\"",
+      "expected_output": "A single line: onboarding call. The phrase reuses the author's repeated term, starts lowercase, has no punctuation, quotes, or hashtags, and fits 'Priya's post on onboarding call'.",
+      "assertions": [
+        "Output is one line with one to three words",
+        "Uses the author's repeated term 'onboarding call' or a close literal variant",
+        "Starts with a lowercase letter",
+        "No ending punctuation, quotation marks, hashtags, or emojis",
+        "Gives no reasoning because none was asked for"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Tag these three posts for my outreach list:\n1. \"Hot take: your pricing page is a sales page. We cut ours from four tiers to two and demo requests went up 30%.\"\n2. \"Hiring update: we're looking for a founding designer. DM me.\"\n3. \"Nobody reads your case studies. We turned ours into 60-second customer videos and they now get shared in every deal.\"",
+      "expected_output": "Three numbered lines in the input order, each one to three words drawn from the post: for example 1. pricing page, 2. founding designer, 3. customer videos (or case studies).",
+      "assertions": [
+        "Returns exactly three lines, numbered 1 to 3, in the input order",
+        "Each phrase is one to three words",
+        "Post 1 is tagged with pricing page or a close literal variant",
+        "Post 2 is tagged with founding designer or hiring a designer",
+        "Each phrase reads naturally in '{author}'s post on {phrase}'",
+        "No hashtags, quotes, or ending punctuation"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Distil this: \"Are you ready for 2027? Big things coming. Follow for more. Link in comments.\"",
+      "expected_output": "Says in one line that the post has no clear topic beyond promotion and asks for the full text or accepts a cautious generalised label if the user insists. Does not invent a topic the post does not contain.",
+      "assertions": [
+        "Does not invent a specific topic that is absent from the post",
+        "Flags in one line that the post has no clear topic",
+        "Asks at most one question",
+        "Contains no em dashes or exclamation marks"
+      ],
+      "files": []
+    }
+  ]
+}

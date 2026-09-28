@@ -1,0 +1,64 @@
+{
+  "skill_name": "deep-ad-research",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Research competitor ads for meal kit delivery in the UK. 20 ads, transcribe them.",
+      "expected_output": "Runs the setup check first. Checks .agents/product-marketing.md then .claude/product-marketing.md and ./ad-research/brand-context.md. If no context exists, suggests gtm-context without blocking and asks only the missing questions (product and buyer), since niche, country, count, and transcription were given. Shows the keyword-mode command with --keyword \"meal kit delivery\" --country GB --limit 20 before running it. After the run, writes an insights file that follows the synthesis template and reports back in the six-point order, including rough cost.",
+      "assertions": [
+        "Runs scripts/run_research.py --check before any paid run",
+        "Checks for the shared GTM context file before asking questions",
+        "Asks no more than five questions and does not re-ask for country, count, or transcription",
+        "Shows the exact command before running it",
+        "Uses keyword mode with country GB and limit 20",
+        "Insights file quotes hooks verbatim and points each claim at a numbered ad",
+        "Recommended tests are written as creative, audience, and offer",
+        "Final reply lists report paths, counts, three longest-running ads, three test ideas, and rough cost in that order"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "What ads is https://www.facebook.com/examplecompetitor running in the US and Canada? I don't have an OpenAI key.",
+      "expected_output": "Runs the setup check. With APIFY_TOKEN set and no OPENAI_API_KEY, explains that transcription is unavailable and proceeds with --no-transcribe rather than stopping. Uses advertiser mode with the full page URL, one run for US and one for CA. Writes a combined insights file named {YYYY-MM-DD}-insights.md for the slug because several countries were run, and notes in the caveats that hooks and transcripts are missing.",
+      "assertions": [
+        "Uses advertiser mode with the full Facebook page URL, not a guessed name",
+        "Runs one command per country, US and CA",
+        "Passes --no-transcribe instead of failing on the missing OpenAI key",
+        "Tells the user where to get an OpenAI key if they want transcripts later",
+        "Writes a multi-country insights file named {YYYY-MM-DD}-insights.md",
+        "Caveats state that no transcripts were available"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "deep ad research on 'accounting software for freelancers' in GB",
+      "expected_output": "Runs the setup check. With both APIFY_TOKEN and OPENAI_API_KEY missing, shows the check output, explains the two keys, the env var names, where to get each, rough costs, and the ways to set them (shell export, .env or .local.env, ~/.deep-ad-research.env, --env-file). Reminds the user to keep .env out of git. Does not attempt a run and does not invent any results.",
+      "assertions": [
+        "Stops before any scrape when APIFY_TOKEN is missing",
+        "Names both env vars exactly: APIFY_TOKEN and OPENAI_API_KEY",
+        "Gives the Apify and OpenAI key URLs",
+        "Explains at least two ways to set the keys, including a .env file",
+        "Mentions keeping .env out of version control",
+        "Does not fabricate ads, hooks, or an insights report"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Here are this morning's ad research reports in ./ad-research/project-management-software/. Write the insights. We sell a simple project tool for small agencies at £9 a seat.",
+      "expected_output": "Reads every report in the folder, drops off-topic ads from the loose keyword match and counts them in the caveats, treats one-line or foreign-language Whisper output as untranscribed, and writes the insights file following the synthesis template under about 1,200 words. Recommendations tie to small agencies and never state the £9 price.",
+      "assertions": [
+        "Follows the synthesis template section order",
+        "Excludes off-topic ads and states how many were dropped",
+        "Treats Whisper hallucinations on silent videos as no transcript",
+        "Never includes the user's £9 price in a creative recommendation",
+        "Every hook quote matches the report text verbatim",
+        "Describes longest-running as a proxy, not proof",
+        "Contains no em dashes or exclamation marks"
+      ],
+      "files": ["ad-research/project-management-software/2026-09-28-GB.md"]
+    }
+  ]
+}

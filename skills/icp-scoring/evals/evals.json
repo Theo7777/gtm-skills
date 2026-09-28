@@ -1,0 +1,58 @@
+{
+  "skill_name": "icp-scoring",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Score these accounts against our ICP: Northwind Analytics, Brightpath HR, Fabrikam Logistics, Contoso Payments, Tailspin Studio. Our ICP is in the context file.",
+      "expected_output": "Reads the ICP from .agents/product-marketing.md (or .claude/product-marketing.md). Shows the fit criteria and signal weights and confirms them before scoring. Researches signals from the last 90 days with dates and sources. Returns a scoring key, a table sorted by points with a one-line reason per band, and a summary with counts per band and top three to act on.",
+      "assertions": [
+        "Reads the ICP from the context file rather than asking for it",
+        "Shows the signal list with High = 10, Medium = 5, Low = 2 before scoring",
+        "Every signal listed has a date and a source",
+        "Only counts signals from the last 90 days",
+        "Table is sorted by points, highest first",
+        "Every account has a plain-sentence reason for its band",
+        "Includes a summary with a count per band"
+      ],
+      "files": [".agents/product-marketing.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "Here's a CSV of 180 target accounts at data/targets.csv. Columns are Organisation, Website, Employees, Country. Prioritise them for outbound.",
+      "expected_output": "Maps Organisation and Website to name and domain, deduplicates by domain, and reports counts loaded, duplicates, and skipped rows. Because the list is over 50, states the lookup volume and offers a sample of 10 first. Uses Employees and Country to apply the fit gate before researching signals. Offers a scored CSV with added columns.",
+      "assertions": [
+        "Identifies the name and domain columns from the CSV headers",
+        "Reports duplicates removed and rows skipped",
+        "Offers to score a sample first because the list exceeds 50 accounts",
+        "Uses existing Employees and Country columns for the fit gate",
+        "Asks before using any paid enrichment tool",
+        "Offers a scored CSV with icp_fit, points, band, and band_reason columns"
+      ],
+      "files": ["data/targets.csv"]
+    },
+    {
+      "id": 3,
+      "prompt": "Rank these for me: Acme Agency (a marketing agency, raised money last month and hiring three growth marketers), and Globex Software (B2B SaaS, 120 staff, no news this quarter). We sell to B2B SaaS companies; agencies are never a fit.",
+      "expected_output": "Acme Agency fails the fit gate as an agency, so it lands in D. Monitor despite 30 or more signal points, with the reason stated. Globex passes fit but has no recent signals, so it scores low and is banded by points. No signals are invented for Globex.",
+      "assertions": [
+        "Places Acme Agency in D. Monitor because it is not a fit",
+        "States that the fit gate overrides Acme's signal points",
+        "Does not invent signals for Globex Software",
+        "Bands Globex by its actual points"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Score my account list, pasted below. I haven't written down an ICP. [list of 12 company names]",
+      "expected_output": "Finds no context file, suggests gtm-context without blocking, asks at most five ICP questions, proposes a High/Medium/Low signal list and confirms it before scoring, and lists assumptions in the output.",
+      "assertions": [
+        "Suggests running gtm-context without refusing to continue",
+        "Asks no more than five questions",
+        "Proposes a signal list and asks for confirmation before scoring",
+        "Lists assumptions in the output"
+      ],
+      "files": []
+    }
+  ]
+}

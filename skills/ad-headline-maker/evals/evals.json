@@ -1,0 +1,51 @@
+{
+  "skill_name": "ad-headline-maker",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write me some headlines for our app. It's a meal-planning app for busy parents that builds a weekly plan and shopping list in one tap. People worry it'll suggest fussy recipes their kids won't eat.",
+      "expected_output": "Checks for .agents/product-marketing.md then .claude/product-marketing.md; if absent, suggests gtm-context without blocking and proceeds with the details given. Produces three to five headlines using Core Benefit + Objection Crusher, each two parts separated by a full stop, each 10 words or fewer. At least one headline crushes the fussy-eater objection. Each headline has a breakdown (core benefit, objection crusher) and a word count, followed by an assumptions list.",
+      "assertions": [
+        "Checks for the shared product marketing context file before asking questions",
+        "Does not block on missing context; asks at most five questions or proceeds",
+        "Every headline has 10 words or fewer",
+        "Every headline has two parts separated by a full stop",
+        "At least one headline directly addresses the fussy-eater or kid-friendly objection",
+        "Shows core benefit, objection crusher, and word count for each headline",
+        "Avoids weak patterns such as 'Helps you' or 'Enables you'",
+        "Contains no em dashes or exclamation marks"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I need Google Ads RSA headlines for an online bookkeeping service for UK sole traders. Main pitch: we do your books and tax return for a fixed monthly fee. Biggest worry is hidden costs.",
+      "expected_output": "Switches to platform mode for Google RSA. Splits the formula across separate headlines, benefit headlines and objection-crusher headlines, each 30 characters or fewer, with the character count shown for each. Provides roughly 10 to 15 headlines that each make sense on their own. Several headlines crush the hidden-cost objection (for example fixed fee, no surprise bills) without inventing a specific price; uses a placeholder if a price is referenced.",
+      "assertions": [
+        "Every headline is 30 characters or fewer including spaces",
+        "Shows a character count next to each headline",
+        "Provides between 10 and 15 headlines",
+        "Splits benefit and objection crusher into separate headlines rather than forcing both into 30 characters",
+        "At least three headlines address hidden costs or fixed pricing",
+        "Does not invent a specific price; uses a placeholder such as [X] if a price appears",
+        "Each headline reads cleanly on its own"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Can you improve this headline for our LinkedIn ad? 'Our innovative platform helps you to transform your recruitment process and take hiring to the next level.' We sell an applicant tracking system for small agencies; setup is the big objection.",
+      "expected_output": "Diagnoses the problems in the original: too long, vague clichés (innovative, transform, next level), weak 'helps you to' pattern, no objection crusher. Rewrites into Core Benefit + Objection Crusher headlines of 10 words or fewer that name a concrete benefit and crush the setup objection. Respects LinkedIn's roughly 70-character recommended headline length and shows counts.",
+      "assertions": [
+        "Names at least three specific problems with the original headline",
+        "Removes 'innovative', 'transform', and 'next level'",
+        "Removes the 'helps you to' pattern",
+        "Every rewritten headline has 10 words or fewer",
+        "Every rewritten headline is 70 characters or fewer, with the count shown",
+        "At least one rewrite crushes the setup objection",
+        "Offers ad-description-maker for the body copy"
+      ],
+      "files": []
+    }
+  ]
+}

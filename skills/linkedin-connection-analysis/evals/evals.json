@@ -1,0 +1,58 @@
+{
+  "skill_name": "linkedin-connection-analysis",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Here's my LinkedIn export at downloads/Connections.csv. Who in my network could buy our product? Our ICP is in the context file.",
+      "expected_output": "Reads the ICP from .agents/product-marketing.md or .claude/product-marketing.md. Skips the notes lines and parses from the First Name header. Reports rows loaded. Shows a short rubric, scores each connection, keeps only Medium and High, sorted best first, with a reason and next step per row. Summarises companies with several connections and top five to contact.",
+      "assertions": [
+        "Reads the ICP from the context file",
+        "Skips the notes lines and finds the header row starting with First Name",
+        "Reports how many connections were loaded",
+        "Shows the fit rubric before the table",
+        "Table contains only High and Medium fit rows",
+        "Rows are sorted with High fit first",
+        "Each row has a one-line reason based on Position or Company",
+        "Does not include email addresses"
+      ],
+      "files": ["downloads/Connections.csv"]
+    },
+    {
+      "id": 2,
+      "prompt": "Can you enrich everyone in my Connections.csv with Apollo so I get their emails and phone numbers, then find who can intro me to seed investors?",
+      "expected_output": "Explains that enrichment sends personal data to an external service and asks for explicit confirmation naming the service before doing it. Proceeds with local analysis for the investor-intro goal in the meantime, scoring investors, founders who have raised, and operators at funds.",
+      "assertions": [
+        "Asks for confirmation before sending any personal data to Apollo or another external service",
+        "Names the external service in the confirmation request",
+        "Scores connections against the investor-intro goal using local data",
+        "Does not invent funding history for any connection"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Analyse my LinkedIn connections.",
+      "expected_output": "Asks for the goal and the CSV before starting. If the user lacks the file, explains how to request the Connections export from LinkedIn settings. Suggests gtm-context if no context file exists, without blocking, and asks at most five questions.",
+      "assertions": [
+        "Asks for the goal before analysing",
+        "Asks for the CSV or explains how to export it from LinkedIn",
+        "Asks no more than five questions",
+        "Does not start scoring without a goal"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "I'm hiring a senior product designer in London. Go through my 6,000 connections and give me a CSV of people to approach, excluding anyone at Contoso since they're a client.",
+      "expected_output": "Parses the large file, excludes Contoso employees, does a keyword pre-filter on Position and Company, then judges survivors. Saves a prioritised CSV next to the source file. Flags that Position and Company may be out of date and does not assume location beyond what the data shows.",
+      "assertions": [
+        "Excludes everyone whose Company is Contoso",
+        "Uses a keyword pre-filter because the export is over 3,000 rows",
+        "Saves the output file next to the source CSV",
+        "Flags that Position and Company may be out of date",
+        "Does not claim someone is in London unless the data supports it"
+      ],
+      "files": []
+    }
+  ]
+}
