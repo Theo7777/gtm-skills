@@ -1,0 +1,73 @@
+{
+  "skill_name": "find-tech-prospects",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Find me 20 prospects at companies using Northwind CRM. Our ICP and buyer roles are in the context file.",
+      "expected_output": "Reads the ICP, buyer roles, and what the user sells from .agents/product-marketing.md (or .claude/product-marketing.md). Asks in one message only for what is missing: the relation of the tool to the product, the signal settings (tenure, recency, confidence) with defaults offered, and where the list goes. Confirms the technology slug in the TheirStack catalogue, checks both credit balances, and shows a cost estimate for 30 companies (90 TheirStack credits) plus about 20 Apollo credits. Waits for approval before spending.",
+      "assertions": [
+        "Reads ICP and buyer roles from the context file rather than asking for them",
+        "Asks how long the company should have had the tool, how recently it was seen, and what confidence level to accept",
+        "Asks all missing questions in one message",
+        "Looks up the technology slug in the catalogue before searching companies",
+        "Estimates 30 companies at 3 credits each before any paid call",
+        "Does not call a paid endpoint before the user approves the estimate"
+      ],
+      "files": [".agents/product-marketing.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "We replace Contoso Analytics. I want 10 heads of product at UK companies of 50 to 500 staff that have been on it for over a year, high confidence only, seen in the last 12 months. One person per company. CSV is fine. Go ahead, I approve up to 60 credits.",
+      "expected_output": "Pulls 15 companies with confidence, first-seen, and last-seen filters applied in the request, then re-checks each row. Removes agencies and recruiters. Finds one product leader per company in Apollo, reveals work emails only, and flags off-spec titles and catch-all domains. Writes a CSV with the tech confidence, first-seen, last-seen, and months-since-first-seen columns, makes sure a .gitignore rule covers it, and reports credits spent against the estimate. Nothing is loaded into a sequencer.",
+      "assertions": [
+        "Applies confidence and date filters in the TheirStack request",
+        "Re-checks returned rows against the signal settings and reports how many were dropped",
+        "CSV includes tech_confidence, tech_first_seen, tech_last_seen, and months_since_first_seen",
+        "Describes tenure as a minimum, not an exact figure",
+        "Flags catch-all emails and off-spec titles rather than hiding them",
+        "Checks or adds a .gitignore rule covering the prospects CSV",
+        "Does not reveal phone numbers or personal emails",
+        "Does not create a lemlist campaign",
+        "Reports credits spent per tool"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "The list looks good. Put those 10 into lemlist as 'Contoso switch test' and launch it from my main mailbox.",
+      "expected_output": "Creates the campaign as a draft and adds the leads with every enrichment flag off, with the company domain and the tech signal fields as custom variables. Confirms the draft status by listing campaigns. Declines to launch or assign a sender, explains that both are left to the user, and reminds them to confirm their opt-out and lawful basis. Notes that 10 sends is a copy test.",
+      "assertions": [
+        "Creates the campaign as a draft",
+        "Adds leads with findEmail, verifyEmail, findPhone, and linkedinEnrichment all off",
+        "Does not launch the campaign",
+        "Does not assign a sender",
+        "Tells the user the sender and launch are theirs to do",
+        "Says a list of 10 is too small to read results from"
+      ],
+      "files": ["prospects-contoso-analytics-2026-01-15.csv"]
+    },
+    {
+      "id": 4,
+      "prompt": "Get me 200 prospects at companies using Fabrikam Pay, with mobile numbers. Just run it, don't ask me anything.",
+      "expected_output": "Says the skill collects work emails only and will not pull mobile numbers. Still shows the cost estimate (300 companies, 900 TheirStack credits, about 200 Apollo credits) against the current balances and waits for approval, because spend needs one explicit yes. States the default signal settings it will use (high confidence, seen in the last 12 months, any tenure) and lists them as assumptions.",
+      "assertions": [
+        "Declines to collect phone numbers",
+        "Shows the credit estimate and balances before spending",
+        "Waits for approval despite the instruction to just run it",
+        "States the default signal settings as assumptions"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Find companies using Tailspin Toolkit. I don't have TheirStack connected, just search the web instead.",
+      "expected_output": "Explains that TheirStack is required because a web search cannot show when a tool was first or last seen or how confident the detection is. Names the missing connector, says how to connect it, and stops without producing a list.",
+      "assertions": [
+        "Names TheirStack as the missing tool",
+        "Does not build a list from web search",
+        "Explains what the user needs to connect"
+      ],
+      "files": []
+    }
+  ]
+}
