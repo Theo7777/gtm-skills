@@ -21,7 +21,7 @@ If you already use Corey Haines's [marketingskills](https://github.com/coreyhain
 | `jtbd-research` | Jobs-to-be-done research from reviews, forums, and interviews, with a quote bank |
 | `icp-scoring` | Scores a target account list against your ICP and buying signals, with reasons |
 | `linkedin-connection-analysis` | Turns your LinkedIn connections export into a prioritised network list for a goal |
-| `find-tech-prospects` | Builds a prospect list from companies running a named tool, filtered by tenure, recency, and confidence |
+| `tech-stack-prospects` | Builds a prospect list from companies running a named tool, filtered by tenure, recency, and confidence |
 | `normalise-outreach-names` | Cleans first names and company names so merge fields read naturally |
 | `cold-outreach` | Writes one signal-led cold email or LinkedIn message for a named person |
 | `ad-headline-maker` | Ad headlines using the core benefit plus objection crusher formula |
@@ -39,7 +39,7 @@ Copy the folders you want from `skills/` into your agent's skills folder:
 
 Three skills need API keys or tools of your own. Each has a Setup section:
 
-- `find-tech-prospects`: the TheirStack and Apollo MCP connectors, and optionally lemlist
+- `tech-stack-prospects`: the TheirStack and Apollo MCP connectors, and optionally lemlist
 - `deep-ad-research`: an Apify token and an OpenAI key
 - `ad-message-maker`: the figma-console MCP, and optionally an OpenAI key for images
 

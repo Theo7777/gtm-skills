@@ -1,5 +1,5 @@
 ---
-name: find-tech-prospects
+name: tech-stack-prospects
 description: Build a prospect list from a technology signal. Finds companies that run a named tool (TheirStack technographics), filters them by how long they have had it, how recently it was seen, and how confident the detection is, then finds the right people at each company with a work email (Apollo) and writes the list to a CSV. Can also load the list into lemlist as a draft campaign. Use when the user says "find companies using X", "who runs X", "prospects on a competitor's tool", "technographic list", "find people at companies using", "switch campaign", or names a tool plus the kind of company they sell to.
 metadata:
   version: 1.0.0
