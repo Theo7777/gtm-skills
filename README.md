@@ -26,7 +26,7 @@ If you already use Corey Haines's [marketingskills](https://github.com/coreyhain
 | `cold-outreach` | Writes one signal-led cold email or LinkedIn message for a named person |
 | `ad-headline-maker` | Ad headlines using the core benefit plus objection crusher formula |
 | `ad-description-maker` | Ad descriptions using problem, solution, and benefit, within platform limits |
-| `ad-message-maker` | Three static ad variations in Figma that test three different messages |
+| `b2b-ad-creative` | Static ads for B2B SaaS, software, and apps (most ad skills target ecommerce and DTC), in six formats, built as editable Figma frames |
 | `deep-ad-research` | Pulls competitor ads from the Meta Ad Library and transcribes video ads |
 | `linkedin-post-distill` | Labels a LinkedIn post with a one to three-word topic, in the author's own words |
 
@@ -41,7 +41,7 @@ Three skills need API keys or tools of your own. Each has a Setup section:
 
 - `tech-stack-prospects`: the TheirStack and Apollo MCP connectors, and optionally lemlist
 - `deep-ad-research`: an Apify token and an OpenAI key
-- `ad-message-maker`: the figma-console MCP, and optionally an OpenAI key for images
+- `b2b-ad-creative`: the figma-console MCP, and optionally the Codex CLI or an OpenAI key for ICP photos
 
 ## How each skill is built
 

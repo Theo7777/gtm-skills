@@ -1,0 +1,13 @@
+interface:
+  display_name: "B2B Ad Creative"
+  short_description: "Six B2B ad formats, built as editable Figma frames in the client's brand"
+  default_prompt: "Use $b2b-ad-creative to build a launch set of B2B ads in Figma for this client."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "figma-console"
+      description: "Figma Console MCP (Desktop Bridge) for creating editable frames, variables, and text styles"
+
+policy:
+  allow_implicit_invocation: true

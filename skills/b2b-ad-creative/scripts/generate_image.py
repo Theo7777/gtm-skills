@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate one hero image for ad-message-maker.
+"""Generate one image for b2b-ad-creative (ICP photos, metaphor objects).
 
 Picks a backend automatically:
 
@@ -101,7 +101,7 @@ def normalise(out: Path, width: int, height: int) -> str:
 
 
 def generate_via_codex(codex_bin: str, prompt: str, out: Path, cwd: Path, width: int, height: int, timeout: int) -> None:
-    with tempfile.TemporaryDirectory(prefix="ad-message-maker-") as tmp:
+    with tempfile.TemporaryDirectory(prefix="b2b-ad-creative-") as tmp:
         prompt_path = Path(tmp) / "prompt.txt"
         prompt_path.write_text(prompt)
 
@@ -167,7 +167,7 @@ def generate_via_api(prompt: str, out: Path, width: int, height: int) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate one hero image for ad-message-maker.")
+    parser = argparse.ArgumentParser(description="Generate one image for b2b-ad-creative.")
     parser.add_argument("--out", required=True, help="Absolute output path inside the current folder.")
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--prompt", help="Prompt text.")
@@ -203,7 +203,7 @@ def main() -> int:
         return 0
 
     if backend is None:
-        print("No image backend: install the Codex CLI or set OPENAI_API_KEY. Use a gradient background instead.", file=sys.stderr)
+        print("No image backend: install the Codex CLI or set OPENAI_API_KEY. Use a flat brand-colour background instead.", file=sys.stderr)
         return 2
 
     check_out_path(out, cwd)

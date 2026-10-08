@@ -1,0 +1,66 @@
+{
+  "skill_name": "b2b-ad-creative",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Make launch ads for the client in this repo. We start the campaign next week.",
+      "expected_output": "Reads the shared product marketing context first (or asks up to five questions if none exists); asks which formats (all six or pick), sizes, and variations; writes a copy table with a source for every claim and a to-confirm list; stops for a go before any Figma build.",
+      "assertions": [
+        "Reads client context before asking anything the context answers",
+        "Asks all six or pick, sizes, and variations unless the prompt already said",
+        "Every number, quote, and logo in the copy table has a source",
+        "Stops for approval before building in Figma"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Just do a testimonial ad for them.",
+      "expected_output": "Finds a verbatim testimonial on the client's website, case studies, or reviews, records the URL, and builds only the TE format. If no real quote exists, says so and does not invent or paraphrase one.",
+      "assertions": [
+        "Builds only the testimonial format",
+        "Quote is verbatim with a source URL",
+        "Does not invent or reword a testimonial when none qualifies"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Value prop ad with their customer logos underneath.",
+      "expected_output": "Takes 4 to 8 logos only from the client's own website or a list they gave, lists each logo in to-confirm.md, and builds VL frames with logos in one tone, never stretched.",
+      "assertions": [
+        "Logos come only from the client's site or a provided list",
+        "Every logo is listed for the user to confirm",
+        "Uses between 4 and 8 logos"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Make the headline and photo one with people from their ICP.",
+      "expected_output": "Writes an image prompt from the ICP (role, setting, task), generates the photo with the Codex image tool or the script, builds IP frames with floating chips as editable shapes, and never presents generated people as a named customer.",
+      "assertions": [
+        "Image prompt names the ICP role and a real task, with no text or logos in the image",
+        "Generated people are labelled illustrative and not paired with a real quote",
+        "Chips and cards are editable Figma shapes, not part of the image"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Build the product in action ad.",
+      "expected_output": "Uses a real product screenshot (provided, from the website, or a headless capture), with rounded corners and no browser frame by default, under a large outcome headline. If no real screen exists, builds an illustrative UI from editable shapes and flags it; never generates a fake product screen with an image model.",
+      "assertions": [
+        "Prefers a real screenshot",
+        "Does not generate the product UI with an image model",
+        "Flags any illustrative UI in to-confirm.md"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Figma isn't open, can you still do the ads?",
+      "expected_output": "Does not fail: writes copy.md, spec.json, prompts.md, assets, and to-confirm.md, says Figma was not changed, and explains how to connect the Desktop Bridge so the spec can be built later in Claude Code or Codex.",
+      "assertions": [
+        "Saves the spec and copy without building",
+        "States clearly that Figma was not modified",
+        "Gives the connection fix"
+      ]
+    }
+  ]
+}
