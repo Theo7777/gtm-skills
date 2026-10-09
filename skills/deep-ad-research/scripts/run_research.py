@@ -73,10 +73,13 @@ def slugify(text: str) -> str:
 
 def apify_run(input_payload: dict, token: str) -> list[dict]:
     """Start an Apify actor run, poll until it finishes, and return the dataset items."""
+    # The token goes in a header, not the URL, so it never shows up in error messages or logs.
+    headers = {"Authorization": f"Bearer {token}"}
     print("[Apify] Starting actor run...")
     run_resp = requests.post(
-        f"https://api.apify.com/v2/acts/{APIFY_ACTOR}/runs?token={token}",
+        f"https://api.apify.com/v2/acts/{APIFY_ACTOR}/runs",
         json=input_payload,
+        headers=headers,
         timeout=30,
     )
     run_resp.raise_for_status()
@@ -85,7 +88,8 @@ def apify_run(input_payload: dict, token: str) -> list[dict]:
 
     while True:
         status_resp = requests.get(
-            f"https://api.apify.com/v2/actor-runs/{run_id}?token={token}",
+            f"https://api.apify.com/v2/actor-runs/{run_id}",
+            headers=headers,
             timeout=15,
         )
         status = status_resp.json()["data"]["status"]
@@ -99,7 +103,8 @@ def apify_run(input_payload: dict, token: str) -> list[dict]:
         sys.exit(1)
 
     items_resp = requests.get(
-        f"https://api.apify.com/v2/actor-runs/{run_id}/dataset/items?token={token}&limit=200",
+        f"https://api.apify.com/v2/actor-runs/{run_id}/dataset/items?limit=200",
+        headers=headers,
         timeout=30,
     )
     items_resp.raise_for_status()
